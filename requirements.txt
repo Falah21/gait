@@ -7,3 +7,5 @@ pillow
 openpyxl
 langchain_community
 replicate
+openai
+google-generativeai

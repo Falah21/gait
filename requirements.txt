@@ -1,2 +1,9 @@
-streamlit>=1.37.0
+matplotlib
+pymongo
+plotly-express
+streamlit
 pandas
+pillow
+openpyxl
+langchain_community
+replicate

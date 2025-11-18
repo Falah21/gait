@@ -163,8 +163,8 @@ def login_form(role_label: str = "Admin"):
 # ======================= HALAMAN ADMIN =======================
 class AdminPage:
     def __init__(self):
-        # Data user sementara
-        self.users = {"admin": "admin123"}
+        self.admin_user = st.secrets["ADMIN_USERNAME"]
+        self.admin_pass = st.secrets["ADMIN_PASSWORD"]
         # Koneksi MongoDB
         self.client = MongoClient(st.secrets["MONGO_URI"])
         self.db = self.client['GaitDB']
@@ -870,7 +870,7 @@ class AdminPage:
         if not st.session_state.admin_logged_in:
             username, password, submit = login_form("Admin")
             if submit:
-                if username in self.users and self.users[username] == password:
+                if username == self.admin_user and password == self.admin_pass:
                     st.session_state.admin_logged_in = True
                     st.rerun()
                 else:

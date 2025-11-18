@@ -599,7 +599,7 @@ class AdminPage:
         
         # Stats Overview
         total_data = self.collection.count_documents({})
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         
         with col1:
             st.metric("Total Data Normal", total_data)
@@ -612,10 +612,10 @@ class AdminPage:
             female_count = self.collection.count_documents({"Subject Parameters.Gender": "P"})
             st.metric("Data Wanita", female_count)
             
-        with col4:
-            # Data dengan usia di bawah 30
-            young_count = self.collection.count_documents({"Subject Parameters.Age": {"$lt": 30}})
-            st.metric("Usia < 30", young_count)
+        # with col4:
+        #     # Data dengan usia di bawah 30
+        #     young_count = self.collection.count_documents({"Subject Parameters.Age": {"$lt": 30}})
+        #     st.metric("Usia < 30", young_count)
         
         st.markdown("---")
         

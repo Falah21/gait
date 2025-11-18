@@ -236,12 +236,14 @@ class AdminPage:
 
             /* Stats cards */
             .stats-card {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
+                background: #ffffff !important;
+                color: #000000 !important;
                 padding: 20px;
                 border-radius: 10px;
                 text-align: center;
+                border: 1px solid #ddd;
                 margin-bottom: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             }
             .stats-number {
                 font-size: 2rem;

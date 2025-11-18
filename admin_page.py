@@ -236,7 +236,7 @@ class AdminPage:
 
             /* Stats cards */
             .stats-card {
-                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: #ffffff !important;
                 color: #000000 !important;
                 padding: 20px;
                 border-radius: 10px;

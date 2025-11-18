@@ -164,7 +164,7 @@ def login_form(role_label: str = "Admin"):
 class AdminPage:
     def __init__(self):
         # Data user sementara
-        # self.users = {"admin": "admin123"}
+        self.users = {"admin": "admin123"}
         # Koneksi MongoDB
         self.client = MongoClient(st.secrets["MONGO_URI"])
         self.db = self.client['GaitDB']
@@ -236,7 +236,7 @@ class AdminPage:
 
             /* Stats cards */
             .stats-card {
-                background: #ffffff !important;
+                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 color: #000000 !important;
                 padding: 20px;
                 border-radius: 10px;

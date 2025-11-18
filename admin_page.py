@@ -790,14 +790,14 @@ class AdminPage:
             
             # Stats Overview
             total_exams = len(examinations)
-            unique_patients = len(set(exam['patient_info'].get('nik', '') for exam in examinations if exam['patient_info'].get('nik')))
+            # unique_patients = len(set(exam['patient_info'].get('nik', '') for exam in examinations if exam['patient_info'].get('nik')))
             
-            col1, col2, col3 = st.columns(3)
+            col1, col2 = st.columns(2)
             with col1:
                 st.metric("Total Pemeriksaan", total_exams)
+            # with col2:
+            #     st.metric("Total Pasien Unik", unique_patients)
             with col2:
-                st.metric("Total Pasien Unik", unique_patients)
-            with col3:
                 # Hitung pemeriksaan bulan ini
                 current_month = datetime.now().strftime("%Y-%m")
                 monthly_exams = len([exam for exam in examinations 

@@ -164,7 +164,7 @@ def login_form(role_label: str = "Admin"):
 class AdminPage:
     def __init__(self):
         # Data user sementara
-        self.users = {"admin": "admin123"}
+        # self.users = {"admin": "admin123"}
         # Koneksi MongoDB
         self.client = MongoClient(st.secrets["MONGO_URI"])
         self.db = self.client['GaitDB']

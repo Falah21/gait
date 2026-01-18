@@ -305,12 +305,25 @@ class AdminPage:
     def _sidebar(self):
         st.sidebar.markdown("<p class='sidebar-title'>Sistem Dashboard Pemeriksaan GAIT</p>", unsafe_allow_html=True)
         st.sidebar.markdown("<p class='sidebar-subtitle'>Menu</p>", unsafe_allow_html=True)
-
-        menu = st.sidebar.radio(
-            "",
-            ["Home", "Manajemen User", "Data Normal GAIT", "Riwayat Pemeriksaan Pasien", "Logout"]
-        )
-        return menu
+    
+        menu_list = [
+            "Home",
+            "Manajemen User",
+            "Data Normal GAIT",
+            "Riwayat Pemeriksaan Pasien",
+            "Logout"
+        ]
+    
+        for menu in menu_list:
+            if st.sidebar.button(
+                menu,
+                use_container_width=True,
+                type="primary" if st.session_state.menu_admin == menu else "secondary"
+            ):
+                st.session_state.menu_admin = menu
+                st.rerun()
+    
+        return st.session_state.menu_admin
 
     # ---------- Kartu Admin ----------
     def _account_card(self, username="adminutama"):
@@ -863,8 +876,13 @@ class AdminPage:
     # ---------- Halaman Utama ----------
     def run(self):
         self._inject_css()
+    
+        if "menu_admin" not in st.session_state:
+            st.session_state.menu_admin = "Home"
+    
         if 'admin_logged_in' not in st.session_state:
             st.session_state.admin_logged_in = False
+
 
         # Login Page
         if not st.session_state.admin_logged_in:

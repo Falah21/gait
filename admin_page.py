@@ -355,6 +355,8 @@ class AdminPage:
     # ---------- Kartu Admin ----------
     def _account_card(self, username="adminutama"):
         st.markdown("### Beranda Admin")
+        st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
+        st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
         
         col1, col2, col3 = st.columns(3)
         
@@ -406,8 +408,6 @@ class AdminPage:
         #     <p>Selamat datang di Dashboard Admin GAIT Clinic. Gunakan menu di sidebar untuk mengelola sistem.</p>
         # </div>
         # """, unsafe_allow_html=True)
-        st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
-        st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
 
     # ---------- Data Pasien & Terapis ----------
     def _panel_data(self):

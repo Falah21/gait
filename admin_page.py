@@ -249,6 +249,9 @@ class AdminPage:
                 color: #560000 !important;
                 border: 2px solid #560000 !important;
             }
+            section[data-testid="stSidebar"] button * {
+                color: inherit !important;
+            }
 
 
             /* Main content area */

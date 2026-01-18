@@ -400,12 +400,14 @@ class AdminPage:
                 </div>
                 """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="account-card">
-            <h4>👤 ADMIN UTAMA</h4>
-            <p>Selamat datang di Dashboard Admin GAIT Clinic. Gunakan menu di sidebar untuk mengelola sistem.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        # st.markdown("""
+        # <div class="account-card">
+        #     <h4>ADMIN</h4>
+        #     <p>Selamat datang di Dashboard Admin GAIT Clinic. Gunakan menu di sidebar untuk mengelola sistem.</p>
+        # </div>
+        # """, unsafe_allow_html=True)
+        st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
+        st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
 
     # ---------- Data Pasien & Terapis ----------
     def _panel_data(self):
@@ -926,8 +928,8 @@ class AdminPage:
         menu = self._sidebar()
         if menu == "Home":
             self._account_card()
-            st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
-            st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
+            # st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
+            # st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
             
         elif menu == "Manajemen User":
             self._panel_data()

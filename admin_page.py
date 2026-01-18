@@ -227,6 +227,30 @@ class AdminPage:
                 color: white !important;
             }
 
+            /* FIX: Button sidebar agar tulisan selalu terlihat */
+            section[data-testid="stSidebar"] button {
+                background-color: #6b0000 !important;
+                color: #ffffff !important;
+                border-radius: 8px;
+                height: 42px;
+                font-weight: 600;
+                border: none;
+            }
+            
+            /* Hover */
+            section[data-testid="stSidebar"] button:hover {
+                background-color: #8a0000 !important;
+                color: #ffffff !important;
+            }
+            
+            /* Tombol aktif (menu terpilih) */
+            section[data-testid="stSidebar"] button[kind="primary"] {
+                background-color: #ffffff !important;
+                color: #560000 !important;
+                border: 2px solid #560000 !important;
+            }
+
+
             /* Main content area */
             .main .block-container {
                 padding-top: 2rem;

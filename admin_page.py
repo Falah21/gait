@@ -163,8 +163,8 @@ def login_form(role_label: str = "Admin"):
 # ======================= HALAMAN ADMIN =======================
 class AdminPage:
     def __init__(self):
-        # Data user sementara
-        self.users = {"admin": "admin123"}
+        self.admin_user = st.secrets["ADMIN_USERNAME"]
+        self.admin_pass = st.secrets["ADMIN_PASSWORD"]
         # Koneksi MongoDB
         self.client = MongoClient(st.secrets["MONGO_URI"])
         self.db = self.client['GaitDB']
@@ -236,12 +236,14 @@ class AdminPage:
 
             /* Stats cards */
             .stats-card {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
+                background: #ffffff !important;
+                color: #000000 !important;
                 padding: 20px;
                 border-radius: 10px;
                 text-align: center;
+                border: 1px solid #ddd;
                 margin-bottom: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             }
             .stats-number {
                 font-size: 2rem;
@@ -304,25 +306,11 @@ class AdminPage:
         st.sidebar.markdown("<p class='sidebar-title'>Sistem Dashboard Pemeriksaan GAIT</p>", unsafe_allow_html=True)
         st.sidebar.markdown("<p class='sidebar-subtitle'>Menu</p>", unsafe_allow_html=True)
 
-        menu_list = [
-            "Home",
-            "Manajemen User",
-            "Data Normal GAIT",
-            "Riwayat Pemeriksaan Pasien",
-            "Logout"
-        ]
-
-        for menu in menu_list:
-            if st.sidebar.button(
-                menu,
-                use_container_width=True,
-                type="primary" if st.session_state.menu_admin == menu else "secondary"
-            ):
-                st.session_state.menu_admin = menu
-                st.rerun()
-
-        return st.session_state.menu_admin
-
+        menu = st.sidebar.radio(
+            "",
+            ["Home", "Manajemen User", "Data Normal GAIT", "Riwayat Pemeriksaan Pasien", "Logout"]
+        )
+        return menu
 
     # ---------- Kartu Admin ----------
     def _account_card(self, username="adminutama"):
@@ -611,7 +599,7 @@ class AdminPage:
         
         # Stats Overview
         total_data = self.collection.count_documents({})
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         
         with col1:
             st.metric("Total Data Normal", total_data)
@@ -624,10 +612,10 @@ class AdminPage:
             female_count = self.collection.count_documents({"Subject Parameters.Gender": "P"})
             st.metric("Data Wanita", female_count)
             
-        with col4:
-            # Data dengan usia di bawah 30
-            young_count = self.collection.count_documents({"Subject Parameters.Age": {"$lt": 30}})
-            st.metric("Usia < 30", young_count)
+        # with col4:
+        #     # Data dengan usia di bawah 30
+        #     young_count = self.collection.count_documents({"Subject Parameters.Age": {"$lt": 30}})
+        #     st.metric("Usia < 30", young_count)
         
         st.markdown("---")
         
@@ -802,14 +790,14 @@ class AdminPage:
             
             # Stats Overview
             total_exams = len(examinations)
-            unique_patients = len(set(exam['patient_info'].get('nik', '') for exam in examinations if exam['patient_info'].get('nik')))
+            # unique_patients = len(set(exam['patient_info'].get('nik', '') for exam in examinations if exam['patient_info'].get('nik')))
             
-            col1, col2, col3 = st.columns(3)
+            col1, col2 = st.columns(2)
             with col1:
                 st.metric("Total Pemeriksaan", total_exams)
+            # with col2:
+            #     st.metric("Total Pasien Unik", unique_patients)
             with col2:
-                st.metric("Total Pasien Unik", unique_patients)
-            with col3:
                 # Hitung pemeriksaan bulan ini
                 current_month = datetime.now().strftime("%Y-%m")
                 monthly_exams = len([exam for exam in examinations 
@@ -875,7 +863,6 @@ class AdminPage:
     # ---------- Halaman Utama ----------
     def run(self):
         self._inject_css()
-
         if 'admin_logged_in' not in st.session_state:
             st.session_state.admin_logged_in = False
 
@@ -883,7 +870,7 @@ class AdminPage:
         if not st.session_state.admin_logged_in:
             username, password, submit = login_form("Admin")
             if submit:
-                if username in self.users and self.users[username] == password:
+                if username == self.admin_user and password == self.admin_pass:
                     st.session_state.admin_logged_in = True
                     st.rerun()
                 else:

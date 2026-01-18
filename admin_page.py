@@ -144,7 +144,7 @@ def login_form(role_label: str = "Admin"):
     st.markdown("---")
 
     st.subheader(f"Login - {role_label}")
-    username = st.text_input("Username", placeholder="Masukkan username anda")
+    username = st.text_input("NIP", placeholder="Masukkan NIP anda")
     password = st.text_input("Password", type="password", placeholder="Masukkan password anda")
 
     st.markdown("<a class='forgot' href='#'>Lupa kata sandi?</a>", unsafe_allow_html=True)
@@ -355,8 +355,8 @@ class AdminPage:
     # ---------- Kartu Admin ----------
     def _account_card(self, username="adminutama"):
         st.markdown("### Beranda Admin")
-        st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
-        st.info("Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
+        # st.success("🎉 Selamat datang di Dashboard Admin GAIT Clinic!")
+        st.info("Selamat datang di Dashboard Pemeriksaan Gait. Gunakan menu di sidebar untuk mengelola data pengguna dan data normal GAIT.")
         
         col1, col2, col3 = st.columns(3)
         
